@@ -1,0 +1,13 @@
+
+{% block title %}Invoice Detail{% endblock title %}
+
+{% block content %}
+    <h1>{{ invoice.Invoice_no }}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {{ invoice.Invoice_Date }} <br>
+    {{ invoice.Invoice_Amount }} <br>
+    {{invoice.Rental_Period}}<br>
+    {{invoice.job_no}}<br>
+    
+    <a href="{% url 'rent:invoice_list' %}" > Back to Invoice list </a>
+{% endblock content %}

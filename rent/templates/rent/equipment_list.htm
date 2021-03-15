@@ -1,0 +1,23 @@
+
+{% block title %}Equipment List{% endblock title %}
+
+{% block content %}
+    {% if equipment %} <!--this is the context_object_name-->
+        <table>
+        {% for equipment in equipment %}
+          <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'rent:equipment_detail' equipment.id %}">{{ equipment.Equipment_name }}</a></td>
+                <td><a href="{% url 'rent:equipment_update' equipment.id %}" > Edit </a></td>
+                <td><a href="{% url 'rent:equipment_delete' equipment.id %}" > Delete </a></td>
+          </tr>
+        {% endfor %}
+            <td><p><a href="{% url 'rent:equipment_create' %}" > Add an equipment here </a><br><br>
+            
+            
+        </table>
+    {% else %}
+        <p>No equipment are currently available</p>
+        <td><a href="{% url 'rent:equipment_create' %}" > Add an equipment here </a></td>
+        
+    {% endif %}
+<p><a href="{%url 'login' %}"> Back to home page </a></p>
+{% endblock content %}

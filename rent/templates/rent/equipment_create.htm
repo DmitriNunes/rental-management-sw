@@ -1,0 +1,10 @@
+{% block title %}Enter New Equipment Details{% endblock title %}
+
+{% block content %}
+    <form method="post" action="" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" value="Save">Save</button>
+        <a href="{% url 'rent:equipment_list' %}" > Cancel </a>
+    </form>
+{% endblock content %}

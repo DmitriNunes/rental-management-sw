@@ -1,0 +1,24 @@
+
+
+{% block title %}Jobs List{% endblock title %}
+
+{% block content %}
+    {% if job %} <!--this is the context_object_name-->
+        <table>
+        {% for job in job %}
+          <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'rent:job_detail' job.id %}">{{ job.Job_name }}</a></td>
+                <td><a href="{% url 'rent:job_update' job.id %}" > Edit </a></td>
+                <td><a href="{% url 'rent:job_delete' job.id %}" > Delete </a></td>
+          </tr>
+        {% endfor %}
+            <td><p><a href="{% url 'rent:job_create' %}" > Add a job here </a><br><br>
+            
+            
+        </table>
+    {% else %}
+        <p>No jobs are currently in progress</p>
+        <td><a href="{% url 'rent:job_create' %}" > Add a job here </a></td>
+        
+    {% endif %}
+<p><a href="{%url 'login' %}"> Back to home page </a></p>
+{% endblock content %}

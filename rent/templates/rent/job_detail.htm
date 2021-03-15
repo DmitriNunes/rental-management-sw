@@ -1,0 +1,14 @@
+
+{% block title %}Job Detail{% endblock title %}
+
+{% block content %}
+    <h1>{{ job.Job_name }}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {{ job.Job_no }} <br>
+    {{ job.Phase }} <br>
+    {%if job.Job_status %}
+        Job is complete<br>
+    {% endif %}
+    {{ job.PO_no }} <br>
+    <a href="{% url 'rent:job_list' %}" > Back to Job list </a>
+{% endblock content %}
