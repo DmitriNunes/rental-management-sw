@@ -14,7 +14,7 @@ from rent.forms import JobForm,EquipmentForm,VendorForm,InvoiceForm,RentalsForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from rent.models import Job, Invoice, Equipment, Vendor, Rentals
 from django.contrib.auth.models import Group
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin,LoginRequiredMixin
 
 ########################### Login/Logout + Authentication ##############################
 def index(request):
@@ -66,34 +66,46 @@ def logoutUser(request):
 
 ######################## Forms for Job ########################################## 
 
-class Job_List(ListView):
+class Job_List(LoginRequiredMixin,PermissionRequiredMixin,ListView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_job'
     model = Job
     form_class=JobForm
     template_name = 'rent/job_list.htm'
     context_object_name = 'job'
 
-class Job_Detail(DetailView):
+class Job_Detail(LoginRequiredMixin,PermissionRequiredMixin,DetailView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_job'
     model = Job
     form_class=JobForm
     template_name = 'rent/job_detail.htm'
     context_object_name = 'job'
 
-class Job_Create(PermissionRequiredMixin, CreateView):
-    permission_required='job.add_job'
+class Job_Create(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.add_job'
     model = Job
     form_class=JobForm
     template_name = 'rent/job_create.htm'
     success_url = reverse_lazy('rent:job_list')
 
-class Job_Update(PermissionRequiredMixin, UpdateView):
-    permission_required='job.change_job'
+class Job_Update(LoginRequiredMixin,PermissionRequiredMixin, UpdateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.change_job'
     model = Job
     form_class=JobForm
     template_name = 'rent/job_update.htm'
     success_url = reverse_lazy('rent:job_list')
 
-class Job_Delete(PermissionRequiredMixin,DeleteView):
-    permission_required='job.delete_job'
+class Job_Delete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.delete_job'
     model = Job
     form_class=JobForm
     template_name = 'rent/job_delete.htm'
@@ -101,32 +113,47 @@ class Job_Delete(PermissionRequiredMixin,DeleteView):
 ###################################################################################
     
 ######################### Forms for Invoice #######################################
-    
-class Invoice_List(ListView):
+   
+class Invoice_List(LoginRequiredMixin,PermissionRequiredMixin,ListView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_invoice'
     model = Invoice
     form_class=InvoiceForm
     template_name = 'rent/invoice_list.htm'
     context_object_name = 'invoice'
 
-class Invoice_Detail(DetailView):
+class Invoice_Detail(LoginRequiredMixin,PermissionRequiredMixin,DetailView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_invoice'
     model = Invoice
     form_class=InvoiceForm
     template_name = 'rent/invoice_detail.htm'
     context_object_name = 'invoice'
 
-class Invoice_Create(CreateView):
+class Invoice_Create(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.add_invoice'
     model = Invoice
     form_class=InvoiceForm
     template_name = 'rent/invoice_create.htm'
     success_url = reverse_lazy('rent:invoice_list')
 
-class Invoice_Update(UpdateView):
+class Invoice_Update(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.change_invoice'
     model = Invoice
     form_class=InvoiceForm
     template_name = 'rent/invoice_update.htm'
     success_url = reverse_lazy('rent:invoice_list')
 
-class Invoice_Delete(DeleteView):
+class Invoice_Delete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.delete_invoice'
     model = Invoice
     form_class=InvoiceForm
     template_name = 'rent/invoice_delete.htm'
@@ -135,31 +162,46 @@ class Invoice_Delete(DeleteView):
     
 #########################Forms for Vendor ###########################################
 
-class Vendor_List(ListView):
+class Vendor_List(LoginRequiredMixin,PermissionRequiredMixin,ListView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_vendor'
     model = Vendor
     form_class=VendorForm
     template_name = 'rent/vendor_list.htm'
     context_object_name = 'vendor'
 
-class Vendor_Detail(DetailView):
+class Vendor_Detail(LoginRequiredMixin,PermissionRequiredMixin,DetailView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_vendor'
     model = Vendor
     form_class=VendorForm
     template_name = 'rent/vendor_detail.htm'
     context_object_name = 'vendor'
 
-class Vendor_Create(CreateView):
+class Vendor_Create(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.add_vendor'
     model = Vendor
     form_class=VendorForm
     template_name = 'rent/vendor_create.htm'
     success_url = reverse_lazy('rent:vendor_list')
 
-class Vendor_Update(UpdateView):
+class Vendor_Update(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.change_vendor'
     model = Vendor
     form_class=VendorForm
     template_name = 'rent/vendor_update.htm'
     success_url = reverse_lazy('rent:vendor_list')
 
-class Vendor_Delete(DeleteView):
+class Vendor_Delete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.delete_vendor'
     model = Vendor
     form_class=VendorForm
     template_name = 'rent/vendor_delete.htm'
@@ -168,31 +210,46 @@ class Vendor_Delete(DeleteView):
 
 #############################Forms for Equipment#####################################
     
-class Equipment_List(ListView):
+class Equipment_List(LoginRequiredMixin,PermissionRequiredMixin,ListView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_equipment'
     model = Equipment
     form_class=EquipmentForm
     template_name = 'rent/equipment_list.htm'
     context_object_name = 'equipment'
 
-class Equipment_Detail(DetailView):
+class Equipment_Detail(LoginRequiredMixin,PermissionRequiredMixin,DetailView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_equipment'
     model = Equipment
     form_class=EquipmentForm
     template_name = 'rent/equipment_detail.htm'
     context_object_name = 'equipment'
 
-class Equipment_Create(CreateView):
+class Equipment_Create(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.add_equipment'
     model = Equipment
     form_class=EquipmentForm
     template_name = 'rent/equipment_create.htm'
     success_url = reverse_lazy('rent:equipment_list')
 
-class Equipment_Update(UpdateView):
+class Equipment_Update(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.change_equipment'
     model = Equipment
     form_class=EquipmentForm
     template_name = 'rent/equipment_update.htm'
     success_url = reverse_lazy('rent:equipment_list')
 
-class Equipment_Delete(DeleteView):
+class Equipment_Delete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.delete_equipment'
     model = Equipment
     form_class=EquipmentForm
     template_name = 'rent/equipment_delete.htm'
@@ -202,31 +259,46 @@ class Equipment_Delete(DeleteView):
     
 ############################## Forms for Rentals ######################################
 
-class Rental_List(ListView):
+class Rental_List(LoginRequiredMixin,PermissionRequiredMixin,ListView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_rentals'
     model = Rentals
     form_class=RentalsForm
     template_name = 'rent/rental_list.htm'
     context_object_name = 'rental'
 
-class Rental_Detail(DetailView):
+class Rental_Detail(LoginRequiredMixin,PermissionRequiredMixin,DetailView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_rentals'
     model = Rentals
     form_class=RentalsForm
     template_name = 'rent/rental_detail.htm'
     context_object_name = 'rental'
 
-class Rental_Create(CreateView):
+class Rental_Create(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.add_rentals'
     model = Rentals
     form_class=RentalsForm
     template_name = 'rent/rental_create.htm'
     success_url = reverse_lazy('rent:rental_list')
 
-class Rental_Update(UpdateView):
+class Rental_Update(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.change_rentals'
     model = Rentals
     form_class=RentalsForm
     template_name = 'rent/rental_update.htm'
     success_url = reverse_lazy('rent:rental_list')
 
-class Rental_Delete(DeleteView):
+class Rental_Delete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.delete_rentals'
     model = Rentals
     form_class=RentalsForm
     template_name = 'rent/rental_delete.htm'
