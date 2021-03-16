@@ -1,0 +1,28 @@
+
+{% block title %}Rentals List{% endblock title %}
+{% load bootstrap %}
+{% block content %}
+<div class="container">
+    <form method="GET">    
+    {{filter.form|bootstrap}}
+    <button type="submit" class="btn btn-primary"> Search </button>
+    </form>
+    {% if rental %} <!--this is the context_object_name-->
+        <table>
+        {% for rental in filter.qs %} <!--fliter.qs-->
+          <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'rent:rental_detail' rental.id %}">{{ rental.Rental_ID }}</a></td>
+                <td><a href="{% url 'rent:rental_update' rental.id %}" > Edit </a></td>
+                <td><a href="{% url 'rent:rental_delete' rental.id %}" > Delete </a></td>
+          </tr>
+        {% endfor %}
+            <td><p><a href="{% url 'rent:rental_create' %}" > Add a rental here </a><br><br>
+            
+            
+        </table>
+    {% else %}
+        <p>No current rentals</p>
+        <td><a href="{% url 'rent:rental_create' %}" > Add a rental here </a></td>
+        
+    {% endif %}
+<p><a href="{%url 'login' %}"> Back to home page </a></p>
+{% endblock content %}

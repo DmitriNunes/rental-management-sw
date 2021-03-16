@@ -1,0 +1,22 @@
+
+{% block title %}Invoice List{% endblock title %}
+
+{% block content %}
+    {% if invoice %} <!--this is the context_object_name-->
+        <table>
+        {% for invoice in invoice %}
+          <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'rent:invoice_detail' invoice.id %}">{{ invoice.Invoice_no }}</a></td>
+                
+          </tr>
+        {% endfor %}
+            <td><p><a href="{% url 'rent:invoice_create' %}" > Create invoice here </a><br><br>
+            
+            
+        </table>
+    {% else %}
+        <p>No invoices available</p>
+        <td><a href="{% url 'rent:invoice_create' %}" > Add an invoice here </a></td>
+        
+    {% endif %}
+<p><a href="{%url 'login' %}"> Back to home page </a></p>
+{% endblock content %}

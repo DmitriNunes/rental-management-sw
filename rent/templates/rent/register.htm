@@ -1,0 +1,19 @@
+<h1> Register </h1>
+
+<form method="POST", action="">
+{% csrf_token %}
+{% for field in form %}
+    {{field.label}}
+    {{field}} <br><br>
+{% endfor %}
+
+<input type="submit" name="Create User" value="Register">
+</form>
+{%if form.errors %}
+    {{form.errors}}
+{%else%}
+    Account created
+{%endif%}
+
+Already have an account? <a href="{% url 'login' %}">Login</a>
+					

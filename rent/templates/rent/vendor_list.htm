@@ -1,0 +1,22 @@
+{% block title %}Vendors List{% endblock title %}
+
+{% block content %}
+    {% if vendor %} <!--this is the context_object_name-->
+        <table>
+        {% for vendor in vendor %}
+          <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'rent:vendor_detail' vendor.id %}">{{ vendor.Vendor_name }}</a></td>
+                <td><a href="{% url 'rent:vendor_update' vendor.id %}" > Edit </a></td>
+                <td><a href="{% url 'rent:vendor_delete' vendor.id %}" > Delete </a></td>
+          </tr>
+        {% endfor %}
+            <td><p><a href="{% url 'rent:vendor_create' %}" > Add a vendor here </a><br><br>
+            
+            
+        </table>
+    {% else %}
+        <p>No vendor data available</p>
+        <td><a href="{% url 'rent:vendor_create' %}" > Add a vendor here </a></td>
+        
+    {% endif %}
+<p><a href="{%url 'login' %}"> Back to home page </a></p>
+{% endblock content %}

@@ -1,0 +1,25 @@
+
+{% block title %}Equipment Detail{% endblock title %}
+
+{% block content %}
+    <h1>{{ equipment.Equipment_name }}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {{ equipment.Equipment_ID }} <br>
+    {{ equipment.Serial_no }} <br>
+    {{ equipment.Category}} <br>
+    {{ equipment.Model }} <br>
+    {{ equipment.Make }} <br>
+    {{ equipment.Buy_price}} <br>
+    {{ equipment.Rent_price }} <br>
+    {{ equipment.vendor_no}} <br>
+    
+    
+    <a href="{% url 'rent:equipment_list' %}" > Back to Equipment list </a>
+{% endblock content %}
+
+
+
+
+
+   
+    

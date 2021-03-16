@@ -1,0 +1,12 @@
+{% block title %}Vendor Detail{% endblock title %}
+
+{% block content %}
+    <h1>{{ vendor.Vendor_name }}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {{ vendor.vendor_no }} <br>
+    {{ vendor.Salesman }} <br>
+    {{ vendor.Phone }} <br>
+    <a href="{% url 'rent:vendor_list' %}" > Back to Vendor list </a>
+{% endblock content %}
+
+
