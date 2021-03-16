@@ -35,14 +35,15 @@ def register(request):
             user=form.save()
             username=form.cleaned_data.get('username')
             usergroup=form.cleaned_data.get('groups')
-            
-            if usergroup == Group.objects.get(name='Administrator'):
-                user.groups.add(usergroup)
-                user.save()
-            else:
-                usergroup=Group.objects.get(name='Viewer')
-                user.groups.add(usergroup)
-                user.save()
+            user.groups.add(usergroup[0])
+            user.save()
+            # if usergroup == Group.objects.get(name='Administrator'):
+            #     user.groups.add(usergroup)
+            #     user.save()
+            # else:
+            #     usergroup=Group.objects.get(name='Viewer')
+            #     user.groups.add(usergroup)
+            #     user.save()
             messages.success(request,"Account succesfully created for  " + username)
             return redirect('login')
                 
