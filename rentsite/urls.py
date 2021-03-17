@@ -21,9 +21,9 @@ from rent import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index,name="index"),
+    # path('',views.index,name="index"),
     path('register/',views.register,name="register"),
-    path('login/',views.loginpage, name="login"),
+    path('',views.loginpage, name="login"),
     path('logout/',views.logoutUser, name="logout"),
     # path('home/',views.home, name="home"),
     path('home/',include('rent.urls',namespace='home')),

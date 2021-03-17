@@ -1,16 +1,75 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>Job Detail</title>
 
-{% block title %}Job Detail{% endblock title %}
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
 
-{% block content %}
-    <h1>{{ job.Job_name }}</h1>
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    {{ job.Job_no }} <br>
-    {{ job.Phase }} <br>
-    {%if job.Job_status %}
-        Job is complete<br>
-    {%else%}
-        Job is not complete<br>
-    {% endif %}
-    {{ job.PO_no }} <br>
-    <a href="{% url 'rent:job_list' %}" > Back to Job list </a>
-{% endblock content %}
+
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'rent/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+  </head>
+  <body class="bg-light">
+
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Job Details</h2>
+    </div>
+
+      <div class="col-md-7 col-lg-8">
+
+
+
+          <div class="row g-3 form-control">
+
+              {% block content %}
+                <h1>Job Name: {{ job.Job_name }}</h1>
+                {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                Job #: {{ job.Job_no }} <br>
+                Job Phase: {{ job.Phase }} <br>
+                Rental Period: {{invoice.Rental_Period}} days<br>
+                Job Complete?: {%if job.Job_status %}
+                                    Job is complete<br>
+                                {%else%}
+                                    Job is not complete<br>
+                                {% endif %}
+                Job PO: {{ job.PO_no }} <br>
+
+                <a href="{% url 'rent:job_list' %}" class="btn btn-secondary my-2"> Back to Job list </a>
+
+            {% endblock content %}
+
+          </div>
+
+      </div>
+  </main>
+</div>
+  </body>
+</html>

@@ -1,23 +1,91 @@
-
-{% block title %}Report{% endblock title %}
+<!doctype html>
+{% load static %}
 {% load bootstrap %}
-{% block content %}
-<div class="container">
-    <form method="GET">    
-    {{filter.form|bootstrap}}
-    <button type="submit" class="btn btn-primary"> Search </button>
-    </form>
-    {% if rental %} <!--this is the context_object_name-->
-        <table>
-        {% for rental in filter.qs %} <!--fliter.qs-->
-          <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'rent:report_details' rental.id %}">{{ rental.Rental_ID }}</a></td>
-        {% endfor %}
-            
-            
-        </table>
-   
-    {% endif %}
-<p><a href="{%url 'login' %}"> Back to home page </a></p>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.80.0">
+        <title>Check Report</title>
 
-    
-{% endblock content %}
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+
+
+
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'rent/bootstrap.min.css' %}" rel="stylesheet">
+
+        <style>
+              .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+              }
+
+              @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                  font-size: 3.5rem;
+                }
+              }
+        </style>
+
+
+    </head>
+    <body class="text-center">
+
+        <main>
+
+
+{% block content %}
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <h1 class="fw-light">Check Report</h1>
+                            <a href="{%url 'login' %}" class="btn btn-secondary my-2">Back to Home Page</a>
+                    </div>
+                </div>
+            </section>
+
+            <div class="row g-3">
+                <div class="col-md-7 col-lg-8">
+                    <form method="GET">
+                        {{filter.form|bootstrap}}
+                        <button type="submit" class="btn btn-primary"> Search </button>
+                    </form>
+                    {% if rental %} <!--this is the context_object_name-->
+                    <table>
+                    {% for rental in filter.qs %} <!--fliter.qs-->
+                      <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'rent:report_details' rental.id %}">{{ rental.Rental_ID }}</a></td>
+                    {% endfor %}
+
+
+                    </table>
+
+                {% endif %}
+
+            {% endblock content %}
+
+                </div>
+            </div>
+
+
+
+
+        </main>
+
+        <footer class="text-muted py-5">
+            <div class="container">
+                <p class="float-end mb-1">
+                    <a href="#">Back to top</a>
+                </p>
+                <p class="mb-1">Page &copy; Summitworks, Style &copy Bootstrap</p>
+            </div>
+        </footer>
+
+        <script src="{% static 'rent/bootstrap.bundle.min.js' %}"></script>
+    </body>
+</html>

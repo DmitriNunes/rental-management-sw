@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.80.0">
-        <title>Signin Template · Bootstrap v5.0</title>
+        <title>Sign in</title>
 
         <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
@@ -38,20 +38,16 @@
     <body class="text-center">
 
             <main class="form-signin">
-                <!-- Missing Picture Here-->
                 <form method="POST" action="">
                     <h3 id="form-title" class="h3 mb-3 fw-normal">LOGIN</h3>
                     {%csrf_token%}
-                    <!-- <label for="inputEmail" class="visually-hidden">Username</label> -->
                     <input type="text" class="form-control" name="username" label="username" placeholder="username" required autofocus>
-                    <!-- <label for="inputPassword" class="visually-hidden">Password</label> -->
                     <input type="password" class="form-control" name="password" label="password" placeholder="password" required>
                     <div class="checkbox mb-3">
                         <label>
                             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                         </label>
                     </div>
-                    <!-- <input class="btn login_btn" type="submit" value="Login"> -->
                     <p class="mt-5 mb-3 text-muted">&copy; Summitworks 2021</p>
                     Don't have an account? <a href="{% url 'register' %}">Sign Up</a>
                 </form>

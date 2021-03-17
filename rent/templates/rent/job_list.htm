@@ -1,24 +1,90 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.80.0">
+        <title>Job List</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
 
 
-{% block title %}Jobs List{% endblock title %}
 
-{% block content %}
-    {% if job %} <!--this is the context_object_name-->
-        <table>
-        {% for job in job %}
-          <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'rent:job_detail' job.id %}">{{ job.Job_name }}</a></td>
-                <td><a href="{% url 'rent:job_update' job.id %}" > Edit </a></td>
-                <td><a href="{% url 'rent:job_delete' job.id %}" > Delete </a></td>
-          </tr>
-        {% endfor %}
-            <td><p><a href="{% url 'rent:job_create' %}" > Add a job here </a><br><br>
-            
-            
-        </table>
-    {% else %}
-        <p>No jobs are currently in progress</p>
-        <td><a href="{% url 'rent:job_create' %}" > Add a job here </a></td>
-        
-    {% endif %}
-<p><a href="{%url 'login' %}"> Back to home page </a></p>
-{% endblock content %}
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'rent/bootstrap.min.css' %}" rel="stylesheet">
+
+        <style>
+              .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+              }
+
+              @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                  font-size: 3.5rem;
+                }
+              }
+        </style>
+
+
+    </head>
+    <body class="text-center">
+
+        <main>
+
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <h1 class="fw-light">Job List</h1>
+                            <a href="{% url 'rent:job_create' %}" class="btn btn-primary my-2">Add Job</a>
+                            <a href="{%url 'login' %}" class="btn btn-secondary my-2">Back to Home Page</a>
+                    </div>
+                </div>
+            </section>
+
+        {% block content %}
+            {% if job %} <!--this is the context_object_name-->
+                {% for job in job %}
+
+            <div class="album bg-light">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <a href="{% url 'rent:job_detail' job.id %}">{{ job.Job_name }}</a>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'rent:job_update' job.id %}" > Edit </a></button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'rent:job_delete' job.id %}" > Delete </a></button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                {% endfor %}
+            {% else %}
+                    <p>No jobs are currently in progress</p>
+            {% endif %}
+        {% endblock content %}
+            </div>
+        </main>
+
+        <footer class="text-muted py-5">
+            <div class="container">
+                <p class="float-end mb-1">
+                    <a href="#">Back to top</a>
+                </p>
+                <p class="mb-1">Page &copy; Summitworks, Style &copy Bootstrap</p>
+            </div>
+        </footer>
+
+        <script src="{% static 'rent/bootstrap.bundle.min.js' %}"></script>
+    </body>
+</html>

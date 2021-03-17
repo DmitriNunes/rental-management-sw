@@ -78,13 +78,27 @@ WSGI_APPLICATION = 'rentsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
+DATABASES = {
+			'default': {
+				'ENGINE': 'django.db.backends.mysql',
+				'NAME': 'django',
+				'USER': 'admin',
+				'PASSWORD': 'admin1234',
+				'HOST': 'django-database-2.c6pflwh0gter.us-east-1.rds.amazonaws.com',
+				'PORT': '3306',
+  		      # See: https://docs.djangoproject.com/en/3.1/ref/databases/#mysql-sql-mode
+   		     		'OPTIONS': {
+     		       			'init_command': "SET sql_mode='STRICT_ALL_TABLES'"
+     		   		},
+			}
+		}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -122,4 +136,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'https://800081204225-django-static-2.s3.amazonaws.com/static/'
+# '/static/'

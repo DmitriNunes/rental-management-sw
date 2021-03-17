@@ -1,22 +1,79 @@
-{% block title %}Report{% endblock title %}
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>Report Detail</title>
 
-{% block content %}
-    <h1>{{ rental.Rental_ID }}</h1>
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    Buy/Rent: {{ rental.Buy_or_Rent }} <br>
-    Job: {{ rental.job.Job_name }} <br>
-    Job Status: {%if rental.job.Job_status %}
-                    The job is active<br>
-                {%else%}
-                    The job is not active<br>
-                {%endif%}
-    Return Status: {%if rental.Return_Status %}
-                        Returned <br>
-                    {%else%}
-                        Not Returned <br>
-                    {% endif %}
-    Date Received: {{rental.Date_Received }}<br>
-    Date Returned: {{ rental.Date_Returned }} <br>
-    
-    <a href="{% url 'rent:report' %}" > Back to Reports Filter </a>
-{% endblock content %}
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
+
+
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'rent/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+  </head>
+  <body class="bg-light">
+
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Report Details</h2>
+    </div>
+
+      <div class="col-md-7 col-lg-8">
+
+
+
+          <div class="row g-3 form-control">
+
+                          {% block content %}
+                <h1>{{ rental.Rental_ID }}</h1>
+                {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                Buy/Rent: {{ rental.Buy_or_Rent }} <br>
+                Job: {{ rental.job.Job_name }} <br>
+                Job Status: {%if rental.job.Job_status %}
+                                The job is active<br>
+                            {%else%}
+                                The job is not active<br>
+                            {%endif%}
+                Return Status: {%if rental.Return_Status %}
+                                    Returned <br>
+                                {%else%}
+                                    Not Returned <br>
+                                {% endif %}
+                Date Received: {{rental.Date_Received }}<br>
+                Date Returned: {{ rental.Date_Returned }} <br>
+
+                <a href="{% url 'rent:report' %}" class="btn btn-secondary my-2"> Back to Reports Filter </a>
+            {% endblock content %}
+
+          </div>
+
+      </div>
+  </main>
+</div>
+  </body>
+</html>
