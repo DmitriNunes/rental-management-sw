@@ -36,6 +36,8 @@ urlpatterns = [
     path('rentals/<int:pk>/update/', views.Rental_Update.as_view(), name='rental_update'),
     path('rentals/<int:pk>/delete/', views.Rental_Delete.as_view(), name='rental_delete'),
     
+    path('reports/',views.Weekly_Report.as_view(),name='report'),
+    path('reports/<int:pk>/',views.Report_Detail.as_view(),name='report_details'),
     
    ]
 

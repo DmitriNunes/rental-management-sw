@@ -15,7 +15,7 @@ class Job(models.Model):
         return '%s %s' %(self.Job_no,self.Job_name)
     
 class Invoice(models.Model):
-    Invoice_Date=models.DateTimeField(default=timezone.now)
+    Invoice_Date=models.DateField(default=timezone.now)
     Invoice_no=models.CharField(max_length=10,null=False,blank=False,unique=True)
     Rental_Period=models.IntegerField(null=False,blank=False)
     Invoice_Amount=models.DecimalField(null=True, max_digits=10,decimal_places=2)
@@ -51,11 +51,11 @@ class Equipment(models.Model):
         
 
 class Rentals(models.Model):
-    Rental_ID=models.IntegerField(blank=False, null=False)
+    Rental_ID=models.CharField(max_length=10,blank=False, null=False)
     Buy_or_Rent=models.CharField(max_length=10,blank=False,null=False)
-    Date_Received=models.DateTimeField(default=timezone.now)
+    Date_Received=models.DateField(default=timezone.now)
     Return_Status=models.BooleanField(default=False)
-    Date_Returned=models.DateTimeField(blank=True, null= True)
+    Date_Returned=models.DateField(blank=True, null= True)
     Expected_Duration=models.IntegerField(blank=False, null=False)
     job=models.ForeignKey(Job, to_field='Job_no', on_delete=models.SET_NULL, null=True)
     vendor=models.ForeignKey(Vendor, to_field='Vendor_no', on_delete=models.SET_NULL, null=True)
@@ -66,6 +66,8 @@ class Rentals(models.Model):
         verbose_name='Rentals'
         verbose_name_plural='Rentals'
     
+    def __str__(self):
+        return self.Rental_ID
     
     
     

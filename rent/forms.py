@@ -41,3 +41,4 @@ class RentalsForm(forms.ModelForm):
     class Meta:
         model=Rentals
         fields='__all__'
+        

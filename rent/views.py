@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from rent.filters import RentalFilter
+from rent.filters import RentalFilter, WeeklyFilter
 
 
 # Create your views here.
@@ -325,5 +325,28 @@ class Rental_Delete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     success_url = reverse_lazy('rent:rental_list')       
 ###################################################################################
     
+#################################Report Forms#################################
 
+class Weekly_Report(LoginRequiredMixin,ListView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    model=Rentals
+    form_class=RentalsForm
+    template_name='rent/report.htm'
+    context_object_name='rental'
+     
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        context['filter']=WeeklyFilter(self.request.GET,queryset=self.get_queryset())
+        return context
+
+class Report_Detail(LoginRequiredMixin,DetailView):
+    login_url='login'
+    redirect_field_name='redirect_to'
+    permission_required='rent.view_rentals'
+    model = Rentals
+    form_class=RentalsForm
+    template_name = 'rent/report_details.htm'
+    context_object_name = 'rental'
+    
     

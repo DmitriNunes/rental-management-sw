@@ -1,0 +1,24 @@
+
+{% block title %}Report{% endblock title %}
+{% load bootstrap %}
+{% block content %}
+<div class="container">
+    <form method="GET">    
+    {{filter.form|bootstrap}}
+    <button type="submit" class="btn btn-primary"> Search </button>
+    </form>
+    {% if rental %} <!--this is the context_object_name-->
+        <table>
+        {% for rental in filter.qs %} <!--fliter.qs-->
+          <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'rent:report_details' rental.id %}">{{ rental.Rental_ID }}</a></td>
+        {% endfor %}
+            
+            
+        </table>
+   
+    {% endif %}
+<p><a href="{%url 'login' %}"> Back to home page </a></p>
+
+    
+    <a href="{% url 'rent:rental_list' %}" > Back to Job list </a>
+{% endblock content %}

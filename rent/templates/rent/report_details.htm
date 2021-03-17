@@ -1,0 +1,22 @@
+{% block title %}Report{% endblock title %}
+
+{% block content %}
+    <h1>{{ rental.Rental_ID }}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    Buy/Rent: {{ rental.Buy_or_Rent }} <br>
+    Job: {{ rental.job.Job_name }} <br>
+    Job Status: {%if rental.job.Job_status %}
+                    The job is active<br>
+                {%else%}
+                    The job is not active<br>
+                {%endif%}
+    Return Status: {%if rental.Return_Status %}
+                        Returned <br>
+                    {%else%}
+                        Not Returned <br>
+                    {% endif %}
+    Date Received: {{rental.Date_Received }}<br>
+    Date Returned: {{ rental.Date_Returned }} <br>
+    
+    <a href="{% url 'rent:report' %}" > Back to Reports Filter </a>
+{% endblock content %}
