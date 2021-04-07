@@ -339,6 +339,19 @@ class Weekly_Report(LoginRequiredMixin,ListView):
         context=super().get_context_data(**kwargs)
         context['filter']=WeeklyFilter(self.request.GET,queryset=self.get_queryset())
         return context
+    
+# class Flexible_Report(LoginRequiredMixin,ListView):
+#     login_url='login'
+#     redirect_field_name='redirect_to'
+#     model=Rentals
+#     form_class=RentalsForm
+#     template_name='rent/report.htm'
+#     context_object_name='rental'    
+    
+#     def get_context_data(self,**kwargs):
+#         context=super().get_context_data(**kwargs)
+#         context['filter']=FlexibleFilter(self.request.GET,queryset=self.get_queryset())
+#         return context
 
 class Report_Detail(LoginRequiredMixin,DetailView):
     login_url='login'
